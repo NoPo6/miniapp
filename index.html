@@ -8,7 +8,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #d0ebff; /* светло-голубой фон */
+            background-color: #d0ebff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -29,6 +29,21 @@
             border: 1px solid #ccc;
             border-radius: 6px;
             font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .input-box button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .input-box button:hover {
+            background-color: #0056b3;
         }
 
         .input-box h2 {
@@ -39,13 +54,24 @@
 </head>
 <body>
     <div class="input-box">
-        <h2>Введите id</h2>
-        <input type="text" placeholder="Имя...">
+        <h2>Введите ваше имя</h2>
+        <input type="text" id="nameInput" placeholder="Имя...">
+        <br>
+        <button onclick="sendData()">Отправить</button>
     </div>
 
     <script>
         const tg = window.Telegram.WebApp;
-        // tg.expand(); // Разворачивает MiniApp на весь экран
+        tg.expand(); // Разворачивает MiniApp на весь экран
+
+        function sendData() {
+            const input = document.getElementById("nameInput").value;
+            if (input.trim() !== "") {
+                tg.sendData(input); // Отправка данных в Telegram
+            } else {
+                alert("Пожалуйста, введите имя");
+            }
+        }
     </script>
 </body>
 </html>
